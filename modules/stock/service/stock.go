@@ -15,8 +15,6 @@ import (
 	"pi-inventory/modules/stock/models"
 	"pi-inventory/modules/stock/repository"
 	"pi-inventory/modules/stock/schema"
-	warehouseModel "pi-inventory/modules/warehouse/models"
-	warehouseModuleService "pi-inventory/modules/warehouse/service"
 	"time"
 
 	"github.com/google/uuid"
@@ -38,7 +36,6 @@ type stockService struct {
 	attachmentService    attachmentModuleService.AttachmentServiceInterface
 	categoryService      CategoryServiceInterface
 	unitService          UnitServiceInterface
-	warehouseService     warehouseModuleService.WarehouseServiceInterface
 	stockCacheRepository cache.StockCacheRepositoryInterface
 }
 
@@ -46,14 +43,12 @@ func NewStockService(stockRepo repository.StockRepositoryInterface,
 	attachmentSrv attachmentModuleService.AttachmentServiceInterface,
 	categoryService CategoryServiceInterface,
 	unitService UnitServiceInterface,
-	warehouseService warehouseModuleService.WarehouseServiceInterface,
 	stockCacheRepository cache.StockCacheRepositoryInterface) *stockService {
 	return &stockService{
 		stockRepository:      stockRepo,
 		attachmentService:    attachmentSrv,
 		categoryService:      categoryService,
 		unitService:          unitService,
-		warehouseService:     warehouseService,
 		stockCacheRepository: stockCacheRepository,
 	}
 }
@@ -102,12 +97,6 @@ func (ss *stockService) CreateStock(requestParams commonModel.AccountRequstParam
 		}
 	}
 
-	if reqStock.LocationID != 0 {
-		_, err = ss.warehouseService.FindByID(requestParams, reqStock.LocationID)
-		if err != nil {
-			return nil, err
-		}
-	}
 	if reqStock.TrackInventory && reqStock.Status == stockConst.StockInactiveStatus {
 		return nil, &errors.ApplicationError{
 			ErrorType:      errors.Unsuccessfull,
@@ -169,16 +158,6 @@ func (ss *stockService) CreateStock(requestParams commonModel.AccountRequstParam
 			return nil, err
 		}
 
-	}
-
-	if reqStock.LocationID != 0 {
-		updateWarehouseReq := &warehouseModel.UpdateWarehouseRequestBody{
-			IsUsed: true,
-		}
-		_, err = ss.warehouseService.UpdateWarehouse(requestParams, stock.LocationID, updateWarehouseReq)
-		if err != nil {
-			return nil, err
-		}
 	}
 
 	if reqStock.TrackInventory {
@@ -319,12 +298,6 @@ func (ss *stockService) UpdateStock(requestParams commonModel.AccountRequstParam
 			return nil, err
 		}
 	}
-	if reqBody.LocationID != 0 {
-		_, err = ss.warehouseService.FindByID(requestParams, reqBody.LocationID)
-		if err != nil {
-			return nil, err
-		}
-	}
 
 	previousTrackInventoryValue := stock[0].TrackInventory
 
@@ -385,16 +358,6 @@ func (ss *stockService) UpdateStock(requestParams commonModel.AccountRequstParam
 			IsUsed: true,
 		}
 		_, err = ss.unitService.UpdateUnit(requestParams, stocks.UnitID, updateUnitReq)
-		if err != nil {
-			return nil, err
-		}
-	}
-
-	if reqBody.LocationID != 0 {
-		updateWarehouseReq := &warehouseModel.UpdateWarehouseRequestBody{
-			IsUsed: true,
-		}
-		_, err = ss.warehouseService.UpdateWarehouse(requestParams, stocks.LocationID, updateWarehouseReq)
 		if err != nil {
 			return nil, err
 		}

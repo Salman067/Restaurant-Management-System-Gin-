@@ -6,7 +6,6 @@ import (
 	groupItemSchema "pi-inventory/modules/groupItem/schema"
 	"pi-inventory/modules/stock/models"
 	stockSchema "pi-inventory/modules/stock/schema"
-	warehouseSchema "pi-inventory/modules/warehouse/schema"
 
 	commonModel "pi-inventory/common/models"
 
@@ -21,7 +20,6 @@ func Migration(db *gorm.DB) {
 	db.AutoMigrate(&attachmentSchema.Attachment{})
 	db.AutoMigrate(&stockSchema.Category{})
 	db.AutoMigrate(&stockSchema.Unit{})
-	db.AutoMigrate(&warehouseSchema.Warehouse{})
 	db.AutoMigrate(&groupItemSchema.Variant{})
 	db.AutoMigrate(&groupItemSchema.GroupItem{})
 	db.AutoMigrate(&stockSchema.Stock{})

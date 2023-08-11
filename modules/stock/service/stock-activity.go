@@ -9,8 +9,6 @@ import (
 	"pi-inventory/modules/stock/models"
 	"pi-inventory/modules/stock/repository"
 	"pi-inventory/modules/stock/schema"
-	warehouseModel "pi-inventory/modules/warehouse/models"
-	"pi-inventory/modules/warehouse/service"
 	"strings"
 	"time"
 )
@@ -24,18 +22,15 @@ type stockActivityService struct {
 	stockActivityRepository repository.StockActivityRepositoryInterface
 	stockService            StockServiceInterface
 	purposeService          PurposeServiceInterface
-	warehouseService        service.WarehouseServiceInterface
 }
 
 func NewStockActivityService(stockActivityRepo repository.StockActivityRepositoryInterface,
 	stockService StockServiceInterface,
-	purposeService PurposeServiceInterface,
-	warehouseService service.WarehouseServiceInterface) *stockActivityService {
+	purposeService PurposeServiceInterface) *stockActivityService {
 	return &stockActivityService{
 		stockActivityRepository: stockActivityRepo,
 		stockService:            stockService,
 		purposeService:          purposeService,
-		warehouseService:        warehouseService,
 	}
 }
 
@@ -55,13 +50,6 @@ func (sas *stockActivityService) CreateStockActivity(requestParams commonModel.A
 	_, err = sas.purposeService.FindByID(requestParams, reqStockActivity.PurposeID)
 	if err != nil {
 		return nil, err
-	}
-
-	if reqStockActivity.LocationID != 0 {
-		_, err = sas.warehouseService.FindByID(requestParams, reqStockActivity.LocationID)
-		if err != nil {
-			return nil, err
-		}
 	}
 
 	if reqStockActivity.AdjustedDate != nil && stock.AsOfDate.After(*reqStockActivity.AdjustedDate) {
@@ -96,17 +84,6 @@ func (sas *stockActivityService) CreateStockActivity(requestParams commonModel.A
 				"field": "Stock activity",
 			},
 			HttpCode: http.StatusInternalServerError,
-		}
-	}
-
-	if reqStockActivity.LocationID != 0 {
-
-		updateWarehouseReq := &warehouseModel.UpdateWarehouseRequestBody{
-			IsUsed: true,
-		}
-		_, err := sas.warehouseService.UpdateWarehouse(requestParams, stockActivity.LocationID, updateWarehouseReq)
-		if err != nil {
-			return nil, err
 		}
 	}
 
@@ -261,13 +238,6 @@ func (sas *stockActivityService) CreateBulkStockActivity(requestParams commonMod
 			return nil, err
 		}
 
-		if stockActivityInstance.LocationID != 0 {
-			_, err = sas.warehouseService.FindByID(requestParams, stockActivityInstance.LocationID)
-			if err != nil {
-				return nil, err
-			}
-		}
-
 		if stock.Status == consts.StockInactiveStatus {
 			return nil, &errors.ApplicationError{
 				ErrorType:      errors.UnKnownErr,
@@ -288,17 +258,6 @@ func (sas *stockActivityService) CreateBulkStockActivity(requestParams commonMod
 					"field": "Stock activity",
 				},
 				HttpCode: http.StatusInternalServerError,
-			}
-		}
-
-		if stockActivityInstance.LocationID != 0 {
-
-			updateWarehouseReq := &warehouseModel.UpdateWarehouseRequestBody{
-				IsUsed: true,
-			}
-			_, err := sas.warehouseService.UpdateWarehouse(requestParams, stockActivity.LocationID, updateWarehouseReq)
-			if err != nil {
-				return nil, err
 			}
 		}
 

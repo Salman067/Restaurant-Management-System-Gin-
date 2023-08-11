@@ -10,8 +10,6 @@ import (
 	stockController "pi-inventory/modules/stock/controller"
 	stockRepository "pi-inventory/modules/stock/repository"
 	stockService "pi-inventory/modules/stock/service"
-	warehouseConst "pi-inventory/modules/warehouse/consts"
-	warehouseService "pi-inventory/modules/warehouse/service"
 
 	"github.com/go-redis/redis/v8"
 
@@ -41,7 +39,6 @@ func RegisterStockComponent(builder *di.Builder) {
 				ctn.Get(attachmentConst.AttachmentService).(attachmentService.AttachmentServiceInterface),
 				ctn.Get(consts.CategoryService).(stockService.CategoryServiceInterface),
 				ctn.Get(consts.UnitService).(stockService.UnitServiceInterface),
-				ctn.Get(warehouseConst.WarehouseService).(warehouseService.WarehouseServiceInterface),
 				ctn.Get(consts.StockCacheRepository).(stockCache.StockCacheRepositoryInterface)), nil
 		},
 	})
