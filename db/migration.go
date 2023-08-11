@@ -10,8 +10,6 @@ import (
 
 	commonModel "pi-inventory/common/models"
 
-	"github.com/google/uuid"
-
 	"gorm.io/gorm"
 )
 
@@ -32,56 +30,4 @@ func Migration(db *gorm.DB) {
 	db.AutoMigrate(&stockSchema.StockActivity{})
 	db.AutoMigrate(&stockSchema.Purpose{})
 	db.AutoMigrate(&commonModel.AccountUserPermission{})
-
-	CreateDemoTaxList()
-	CreateDemoSupplierList()
-}
-
-func CreateDemoTaxList() {
-	for i := 0; i < 10; i++ {
-		tax := models.TaxResponseBody{
-			ID:          uuid.New(),
-			TaxName:     "Demo Tax 1",
-			AgencyID:    uuid.New(),
-			Description: "Description",
-			SalesRateHistory: []*models.RespRateHistory{
-				{
-					Rate:      10,
-					StartDate: "",
-				},
-				{
-					Rate:      20,
-					StartDate: "",
-				},
-			},
-			PurchaseRateHistory: []*models.RespRateHistory{
-				{
-					Rate:      5,
-					StartDate: "",
-				},
-				{
-					Rate:      6,
-					StartDate: "",
-				},
-			},
-			Status:    "active",
-			CreatedBy: 1,
-			AccountID: 1,
-		}
-		DemoTaxList = append(DemoTaxList, &tax)
-	}
-}
-
-func CreateDemoSupplierList() {
-	for i := 0; i < 10; i++ {
-		supplier := models.SupplierResponseBody{
-			ID:          uuid.New(),
-			Title:       "Demo Title",
-			FirstName:   "Demo First Name",
-			LastName:    "Demo Last Name",
-			DisplayName: "Supplier 1",
-			Status:      "active",
-		}
-		DemoSupplierList = append(DemoSupplierList, &supplier)
-	}
 }
