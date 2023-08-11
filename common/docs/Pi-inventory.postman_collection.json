@@ -1,0 +1,752 @@
+{
+	"info": {
+		"_postman_id": "280ba400-75cd-47c7-8348-e7f89c1259bc",
+		"name": "Pi-inventory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18562462"
+	},
+	"item": [
+		{
+			"name": "Attachment",
+			"item": [
+				{
+					"name": "Upload SIngle file",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "attachment",
+									"type": "file",
+									"src": "/home/bappy60/Documents/testfile1.txt"
+								},
+								{
+									"key": "",
+									"value": "images",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/attachment/upload/single",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"attachment",
+								"upload",
+								"single"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single file",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"ij\",\n    \"username\": \"asdasd\",\n    \"password\": \"sdasda\",\n    \"email\": \"sdsda\",\n    \"mobile\": \"9283747\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/attachment/?attachment_path=attachments/ba7a058870a93ad54a2da4d188fcc378c0edc48f.txt",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"attachment",
+								""
+							],
+							"query": [
+								{
+									"key": "attachment_path",
+									"value": "attachments/ba7a058870a93ad54a2da4d188fcc378c0edc48f.txt"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single file New",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"ij\",\n    \"username\": \"asdasd\",\n    \"password\": \"sdasda\",\n    \"email\": \"sdsda\",\n    \"mobile\": \"9283747\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/attachment/single/2b348b23df5f68120c5248aa91926be2fae087e5.webp",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"attachment",
+								"single",
+								"2b348b23df5f68120c5248aa91926be2fae087e5.webp"
+							],
+							"query": [
+								{
+									"key": "path",
+									"value": "attachments/2b348b23df5f68120c5248aa91926be2fae087e5.webp",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Single file",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"ij\",\n    \"username\": \"asdasd\",\n    \"password\": \"sdasda\",\n    \"email\": \"sdsda\",\n    \"mobile\": \"9283747\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/attachment/?attachment_path=attachments/ba7a058870a93ad54a2da4d188fcc378c0edc48f.txt",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"attachment",
+								""
+							],
+							"query": [
+								{
+									"key": "attachment_path",
+									"value": "attachments/ba7a058870a93ad54a2da4d188fcc378c0edc48f.txt"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "Ping",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/category/ping",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category",
+										"ping"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/category/list",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Single Category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/category/view/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category",
+										"view",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Category",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"Computer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/category/create",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Category",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"abc\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/category/update/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category",
+										"update",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Category",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/category/delete/11",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category",
+										"delete",
+										"11"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Unit",
+					"item": [
+						{
+							"name": "View",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/unit/view/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"unit",
+										"view",
+										"1"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "2",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"Hour\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/unit/create",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"unit",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"Coca-Cola Bangladesh11\"\r\n    // \"OwnerID\":1,\r\n    // \"CreatedBy\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/unit/update/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"unit",
+										"update",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/unit/delete/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"unit",
+										"delete",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/unit/list",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"unit",
+										"list"
+									],
+									"query": [
+										{
+											"key": null,
+											"value": ";",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Variant",
+					"item": [
+						{
+							"name": "View",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/variant/view/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"variant",
+										"view",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/variant/list",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"variant",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteVariant",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/variant/delete/7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"variant",
+										"delete",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"Nepal\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/variant/update/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"variant",
+										"update",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"India\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/variant/create",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"variant",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Warehouse",
+			"item": [
+				{
+					"name": "Ping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/warehouse/ping",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"warehouse",
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/warehouse/list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"warehouse",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/warehouse/view/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"warehouse",
+								"view",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Dhaka 2\",\n    \"address\":\"Badda\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/warehouse/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"warehouse",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update warehouse",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Abc\",\n    \"address\":\"banani\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/warehouse/update/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"warehouse",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete warehouse",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/warehouse/delete/11",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"warehouse",
+								"delete",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/ping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:8089/api"
+		}
+	]
+}

@@ -1,0 +1,11 @@
+.idea
+tmp
+gin-bin
+.env
+vendor
+coverage.out
+attachments/*
+.toml
+.vscode
+__debug_bin
+docker-compose.yml
